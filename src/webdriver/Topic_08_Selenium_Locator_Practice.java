@@ -10,7 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_08_Selenium_Locator_Practice_Part_I {
+public class Topic_08_Selenium_Locator_Practice {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 
@@ -21,7 +21,7 @@ public class Topic_08_Selenium_Locator_Practice_Part_I {
 		//khoi tao object FirefoxDriver de tuong tac voi trinh duyet
 		driver = new FirefoxDriver();
 		
-		//set thoi gian cho de tim duoc element
+		//set thoi gian waiting de tim duoc element
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		//mo trinh duyet toan man hinh
