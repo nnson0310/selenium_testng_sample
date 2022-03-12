@@ -20,6 +20,7 @@ public class Topic_15_WebElement_Exercise {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	@Test
@@ -28,18 +29,15 @@ public class Topic_15_WebElement_Exercise {
 		
 		//kiem tra cac phan tu sau co hien thi
 		WebElement emailInput = driver.findElement(By.id("mail"));
-		Boolean emailIsDisplayed = emailInput.isDisplayed();
-		if (emailIsDisplayed) {
-			System.out.println("Có hiển thị");
-		}
+		Assert.assertTrue(emailInput.isDisplayed());
 		//sleepInSecond(3);
 		emailInput.sendKeys("Automation Testing");
 		WebElement radio = driver.findElement(By.id("under_18"));
-		radio.isDisplayed();
+		Assert.assertTrue(radio.isDisplayed());
 		radio.click();
 		//sleepInSecond(3);
 		WebElement educationInput = driver.findElement(By.id("edu"));
-		educationInput.isDisplayed();
+		Assert.assertTrue(educationInput.isDisplayed());
 		educationInput.sendKeys("Automation Testing");
 		//sleepInSecond(3);
 		//kiem tra phan tu khong hien thi
@@ -75,12 +73,10 @@ public class Topic_15_WebElement_Exercise {
 		//kiem tra cac phan tu sau co selected chua
 		WebElement elementA =  driver.findElement(By.id("under_18"));
 		elementA.click();
-		System.out.println(elementA.isSelected());
+		Assert.assertTrue(elementA.isSelected());
 		WebElement elementB = driver.findElement(By.id("java"));
 		elementB.click();
-		System.out.println(elementB.isSelected());
-		elementB.click();
-		System.out.println(elementB.isSelected());
+		Assert.assertTrue(elementB.isSelected());
 	}
 	
 	@Test
@@ -97,11 +93,11 @@ public class Topic_15_WebElement_Exercise {
 		driver.findElement(By.id("new_password")).sendKeys("@");
 		driver.findElement(By.id("new_password")).sendKeys("123");
 		sleepInSecond(3);
-		System.out.println(driver.findElement(By.id("create-account")).isEnabled());
+		Assert.assertTrue(driver.findElement(By.id("create-account")).isEnabled());
 		sleepInSecond(3);
 		WebElement checkbox = driver.findElement(By.id("marketing_newsletter"));
 		checkbox.click();
-		System.out.println(checkbox.isSelected());
+		Assert.assertTrue(checkbox.isSelected());
 	}
 	
 	@AfterClass
