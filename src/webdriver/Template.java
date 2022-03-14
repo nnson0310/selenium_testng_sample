@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,6 +17,7 @@ public class Template {
 	
 	String pageUrl;
 	WebDriver driver;
+	JavascriptExecutor jsExecutor;
 	String projectPath  = System.getProperty("user.dir");
 	
 	@BeforeClass
@@ -23,6 +25,8 @@ public class Template {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		
 		driver = new FirefoxDriver();
+		
+		jsExecutor = (JavascriptExecutor) driver;
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);

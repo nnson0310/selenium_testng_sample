@@ -168,8 +168,13 @@ public class Topic_20_Handle_Custom_Select {
 
 		driver.findElement(By.cssSelector("div#default-place input")).sendKeys("s");
 		handleCustomSelect("div#default-place input", "div#default-place li.es-visible", "Nissan");
+		driver.findElement(By.xpath("//h3[text()='Effects']")).click();
 
-		Assert.assertEquals(driver.findElement(By.cssSelector("div#default-place li.selected")).getText(), "Nissan");
+		String actualText = (String) jsExecutor.executeScript(
+				"return document.querySelector('div#default-place li.es-visible').innerText",
+				driver.findElement(By.cssSelector("div#default-place li.es-visible")));
+		System.out.println(actualText);
+		Assert.assertEquals(actualText, "Nissan");
 
 	}
 
@@ -199,8 +204,8 @@ public class Topic_20_Handle_Custom_Select {
 			if (item.getText().equals(option)) {
 				// neu element chua visible thi phai scroll xuong de visible
 				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
-				
-				//wait until element to be clickable
+
+				// wait until element to be clickable
 				explicitWait.until(ExpectedConditions.elementToBeClickable(item));
 
 				item.click();
