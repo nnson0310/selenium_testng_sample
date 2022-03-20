@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.Assert;
@@ -21,7 +22,7 @@ public class Template {
 	String pageUrl;
 	WebDriver driver;
 	JavascriptExecutor jsExecutor;
-	Actions action;
+	WebDriverWait explicitWait;
 	String projectPath = System.getProperty("user.dir");
 
 	@BeforeClass
@@ -31,12 +32,16 @@ public class Template {
 		driver = new FirefoxDriver();
 
 		jsExecutor = (JavascriptExecutor) driver;
-
-		// khoi tao instance cua Action de tuong tac voi mouse va keyboard
-		action = new Actions(driver);
+		
+		explicitWait = new WebDriverWait(driver, 10);
 
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	}
+	
+	@Test
+	public void TC_01() {
+		
 	}
 
 	public void sleepInSeconds(long seconds) {
@@ -47,8 +52,8 @@ public class Template {
 		}
 	}
 
-//	@AfterClass
-//	public void AfterClass() {
-//		driver.quit();
-//	}
+	@AfterClass
+	public void AfterClass() {
+		driver.quit();
+	}
 }
