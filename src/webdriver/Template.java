@@ -36,7 +36,7 @@ public class Template {
 		explicitWait = new WebDriverWait(driver, 10);
 
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	@Test
