@@ -80,7 +80,6 @@ public class Topic_29_Handle_Window_Tab {
 
 		// close tat ca cac tab ngoai tru parent tab
 		closeAllTabsExceptParent(parentId);
-
 	}
 
 	public void TC_02() {
@@ -110,7 +109,6 @@ public class Topic_29_Handle_Window_Tab {
 		closeAllTabsExceptParent(parentId);
 	}
 
-	@Test
 	public void TC_03() {
 		pageUrl = "http://live.techpanda.org/";
 		driver.get(pageUrl);
@@ -128,33 +126,76 @@ public class Topic_29_Handle_Window_Tab {
 		driver.findElement(By.cssSelector("a[title='Samsung Galaxy'] + div.product-info a.link-compare")).click();
 		Assert.assertEquals(driver.findElement(By.cssSelector("ul.messages li.success-msg span")).getText(),
 				"The product Samsung Galaxy has been added to comparison list.");
-	
-		//click compare button
+
+		// click compare button
 		driver.findElement(By.cssSelector("button[title='Compare']")).click();
+		sleepInSeconds(3);
+
+		// switch qua cua so moi
+		switchTabByPageTitle("Products Comparison List - Magento Commerce");
+		Assert.assertEquals(driver.getTitle(), "Products Comparison List - Magento Commerce");
+
+		// close tat ca window sau khi switch ve parent window
+		closeAllTabsExceptParent(parentId);
+
+		// click nut Clear All
+		driver.findElement(By.xpath("//a[text()='Clear All']")).click();
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+		sleepInSeconds(3);
+		Assert.assertEquals(driver.findElement(By.cssSelector("ul.messages li.success-msg span")).getText(),
+				"The comparison list was cleared.");
+	}
+	
+	@Test
+	public void TC_04() {
+		pageUrl = "https://dictionary.cambridge.org/vi/";
+		driver.get(pageUrl);
+		
+		//click nut dang nhap
+		driver.findElement(By.xpath("//header[@id='header']//span[text()='Đăng nhập']")).click();
 		sleepInSeconds(3);
 		
 		//switch qua cua so moi
-		switchTabByPageTitle("Products Comparison List - Magento Commerce");
-		Assert.assertEquals(driver.getTitle(), "Products Comparison List - Magento Commerce");
+		switchTabByPageTitle("Login");
+		sleepInSeconds(3);
 		
+		//click nut Log In
+		driver.findElement(By.cssSelector("input[value='Log in']")).click();
+		sleepInSeconds(3);
+		
+		//verify error message hien thi
+		Assert.assertEquals(driver.findElement(By.xpath("//input[contains(@placeholder, 'Email')]//following-sibling::span")).getText(), "This field is required");
+		Assert.assertEquals(driver.findElement(By.xpath("//input[contains(@placeholder, 'Password')]//following-sibling::span")).getText(), "This field is required");
+		
+		//nhap username va password dung va verify da dang nhap thanh cong
+		driver.findElement(By.xpath("//input[contains(@placeholder, 'Email')]")).sendKeys("automationfc.com@gmail.com");
+		driver.findElement(By.xpath("//input[contains(@placeholder, 'Password')]")).sendKeys("Automation000***");
+		sleepInSeconds(3);
+		driver.findElement(By.cssSelector("input[value='Log in']")).click();
+		sleepInSeconds(3);
+		
+		//switch tro lai parent tab
+		switchTabByPageTitle("Cambridge Dictionary | Từ điển tiếng Anh, Bản dịch & Từ điển từ đồng nghĩa");
+		Assert.assertEquals(driver.findElement(By.xpath("//header[@id='header']//span[contains(@class, 'cdo-username')]")).getText(), "Automation FC");
 	}
-	
-	// ngoai switch tab bang page title ta con co the switch
-		// tab bang link (driver.getCurrentUrl()) tuy nhien vi url co
-		// the thay doi nen k recommend dung cach nay
-		public void switchTabByPageTitle(String pageTitle) {
-			// su dung ham getWindowHandle()
-			// de get ra id cua tung tab tung window
-			Set<String> tabId = driver.getWindowHandles();
 
-			for (String id : tabId) {
-				driver.switchTo().window(id);
-				System.out.println(driver.getTitle());
-				if (driver.getTitle().equals(pageTitle)) {
-					break;
-				}
+	// ngoai switch tab bang page title ta con co the switch
+	// tab bang link (driver.getCurrentUrl()) tuy nhien vi url co
+	// the thay doi nen k recommend dung cach nay
+	public void switchTabByPageTitle(String pageTitle) {
+		// su dung ham getWindowHandle()
+		// de get ra id cua tung tab tung window
+		Set<String> tabId = driver.getWindowHandles();
+
+		for (String id : tabId) {
+			driver.switchTo().window(id);
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().equals(pageTitle)) {
+				break;
 			}
 		}
+	}
 
 	// dong tat ca cac tab ngoai tru tab ban dau
 	public void closeAllTabsExceptParent(String parentId) {
