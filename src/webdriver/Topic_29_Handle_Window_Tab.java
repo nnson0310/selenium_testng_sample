@@ -83,7 +83,6 @@ public class Topic_29_Handle_Window_Tab {
 
 	}
 
-	@Test
 	public void TC_02() {
 		pageUrl = "https://kyna.vn/";
 		driver.get(pageUrl);
@@ -92,7 +91,8 @@ public class Topic_29_Handle_Window_Tab {
 		// close popup neu co xuat hien
 
 		// click lan luot cac link tai footer
-		//jsExecutor.executeScript("window.open('https://kyna.vn/danh-sach-khoa-hoc', '_blank')")
+		// jsExecutor.executeScript("window.open('https://kyna.vn/danh-sach-khoa-hoc',
+		// '_blank')")
 		driver.findElement(By.xpath("//div[@id='k-footer']//a[text()='Danh sách khóa học']")).click();
 		sleepInSeconds(3);
 		switchTabByPageTitle("Tổng hợp Tất Cả Khóa Học Online mới nhất tại Kyna");
@@ -110,22 +110,51 @@ public class Topic_29_Handle_Window_Tab {
 		closeAllTabsExceptParent(parentId);
 	}
 
-	// ngoai switch tab bang page title ta con co the switch
-	// tab bang link (driver.getCurrentUrl()) tuy nhien vi url co
-	// the thay doi nen k recommend dung cach nay
-	public void switchTabByPageTitle(String pageTitle) {
-		// su dung ham getWindowHandle()
-		// de get ra id cua tung tab tung window
-		Set<String> tabId = driver.getWindowHandles();
+	@Test
+	public void TC_03() {
+		pageUrl = "http://live.techpanda.org/";
+		driver.get(pageUrl);
+		String parentId = driver.getWindowHandle();
 
-		for (String id : tabId) {
-			driver.switchTo().window(id);
-			// System.out.println(driver.getTitle());
-			if (driver.getTitle().equals(pageTitle)) {
-				break;
+		// click vao Mobile Tab
+		driver.findElement(By.xpath("//div[@id='header-nav']//a[text()='Mobile']")).click();
+
+		// them san pham sony xperia vao cart (add to compare)
+		driver.findElement(By.cssSelector("a[title='Xperia'] + div.product-info a.link-compare")).click();
+		Assert.assertEquals(driver.findElement(By.cssSelector("ul.messages li.success-msg span")).getText(),
+				"The product Sony Xperia has been added to comparison list.");
+
+		// them san pham Samsung Galaxy vao cart (add to compare)
+		driver.findElement(By.cssSelector("a[title='Samsung Galaxy'] + div.product-info a.link-compare")).click();
+		Assert.assertEquals(driver.findElement(By.cssSelector("ul.messages li.success-msg span")).getText(),
+				"The product Samsung Galaxy has been added to comparison list.");
+	
+		//click compare button
+		driver.findElement(By.cssSelector("button[title='Compare']")).click();
+		sleepInSeconds(3);
+		
+		//switch qua cua so moi
+		switchTabByPageTitle("Products Comparison List - Magento Commerce");
+		Assert.assertEquals(driver.getTitle(), "Products Comparison List - Magento Commerce");
+		
+	}
+	
+	// ngoai switch tab bang page title ta con co the switch
+		// tab bang link (driver.getCurrentUrl()) tuy nhien vi url co
+		// the thay doi nen k recommend dung cach nay
+		public void switchTabByPageTitle(String pageTitle) {
+			// su dung ham getWindowHandle()
+			// de get ra id cua tung tab tung window
+			Set<String> tabId = driver.getWindowHandles();
+
+			for (String id : tabId) {
+				driver.switchTo().window(id);
+				System.out.println(driver.getTitle());
+				if (driver.getTitle().equals(pageTitle)) {
+					break;
+				}
 			}
 		}
-	}
 
 	// dong tat ca cac tab ngoai tru tab ban dau
 	public void closeAllTabsExceptParent(String parentId) {
