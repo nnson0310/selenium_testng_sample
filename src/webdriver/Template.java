@@ -22,6 +22,7 @@ public class Template {
 	String pageUrl;
 	WebDriver driver;
 	JavascriptExecutor jsExecutor;
+	Alert alert;
 	WebDriverWait explicitWait;
 	String projectPath = System.getProperty("user.dir");
 
