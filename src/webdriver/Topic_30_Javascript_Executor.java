@@ -41,7 +41,7 @@ public class Topic_30_Javascript_Executor {
 	}
 
 	@Test
-	public void TC_01() {
+	public void TC_02() {
 		pageUrl = "https://automationfc.github.io/html5/index.html";
 		driver.get(pageUrl);
 		WebElement nameInput = driver.findElement(By.cssSelector("input#fname"));
@@ -85,6 +85,16 @@ public class Topic_30_Javascript_Executor {
 		String addressErrorMsg = jsExecutor.executeScript("return arguments[0].validationMessage", addressInput).toString();
 		System.out.println(addressErrorMsg);
 		Assert.assertEquals(addressErrorMsg, "Please select an item in the list.");
+	}
+	
+	@Test
+	public void TC_03() {
+		pageUrl = "https://login.ubuntu.com/";
+		driver.get(pageUrl);
+		
+		//verify error message 
+		driver.findElement(By.cssSelector("form#login-form input#id_email")).sendKeys("a");
+		driver.findElement(By.cssSelector("form#login-form button[name='continue']")).click();
 	}
 
 	public void sleepInSeconds(long seconds) {
