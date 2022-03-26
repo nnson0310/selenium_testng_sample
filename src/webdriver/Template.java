@@ -28,10 +28,15 @@ public class Template {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-
 		driver = new FirefoxDriver();
-
+		//driver = new ChromeDriver();
+		
+		if (driver.toString().contains("firefox")) {
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+		} else if (driver.toString().contains("chrome")) {
+			System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+		}
+		
 		jsExecutor = (JavascriptExecutor) driver;
 		
 		explicitWait = new WebDriverWait(driver, 10);
