@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="testng-6.14.3-sources">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libraries/testng-6.14.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
