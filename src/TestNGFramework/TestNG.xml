@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite data-provider-thread-count="5" name="All Test Suite">
+   <!-- <test verbose="2" preserve-order="true" name="Test NG Framework">
+        <groups>
+            <run>
+                <include name="user"></include>
+                <include name="admin"></include>
+            </run>
+        </groups>
+        <parameter name="url" value="https://www.facebook.com/"></parameter>
+        <parameter name="sub_url" value=""></parameter>
+        <classes>
+                <class name="TestNGFramework.Annotations">
+                </class>
+                <class name="TestNGFramework.GroupA">
+                </class>
+                <class name="TestNGFramework.GroupB">
+                </class>
+            <class name="TestNGFramework.Priority_Skip_Description">
+            </class>
+            <class name="TestNGFramework.DataProvider"></class>
+            <class name="TestNGFramework.Parameter_Optional"></class>
+        </classes>
+    </test>-->
+    <!--<test name="Test Suite Firefox">
+        <classes>
+            <class name="TestNGFramework.Parallel_Firefox"></class>
+        </classes>
+    </test>
+
+    <test name="Test Suite Chrome">
+        <classes>
+            <class name="TestNGFramework.Parallel_Chrome"></class>
+        </classes>
+    </test>-->
+   <!--<test name="Parallel in single method">
+      <classes>
+         <class name="TestNGFramework.Parallel_Single_Method_Data_Provider"></class>
+      </classes>
+   </test>-->
+
+   <listeners>
+      <listener class-name="TestNGFramework.Listener"></listener>
+   </listeners>
+
+   <test name="Listener in .xml">
+      <classes>
+         <class name="TestNGFramework.Depend_On_Test_Case"></class>
+      </classes>
+   </test>
+
+   <!--<test name="Loop in TestNG">
+      <parameter name="email" value="admin123@gmail.com"></parameter>
+      <parameter name="password" value="123456"></parameter>
+      <classes>
+         <class name="TestNGFramework.Loop"></class>
+      </classes>
+      <packages>
+         <package name="TestNGFramework"></package>
+      </packages>
+   </test>-->
+</suite>
+
+<!--
+1. De run tat ca cac test case trong 1 package co san ta su dung the <packages> <package name="ten_package">\
+2. Ta co the khai bao listener trong file .xml de apply cho 1 class cu the hoac cho toan bo class
+-->
